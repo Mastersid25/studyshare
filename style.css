@@ -1,0 +1,89 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('https://images.unsplash.com/photo-1513185041617-8ab03f83d6c5?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* Books wallpaper */
+    background-size: cover;
+    background-position: center;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #f8f9fa; /* Light text for contrast */
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.75); /* Less transparent background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s;
+}
+
+.container:hover {
+    transform: scale(1.03);
+}
+
+h1 {
+    color: #007bff; /* Header color */
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+input[type="file"] {
+    margin-top: 20px;
+    padding: 12px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    width: 80%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="file"]:focus {
+    border-color: #0056b3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#status {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: #28a745;
+}
+
+#filePreview {
+    margin-top: 20px;
+    font-size: 1em;
+    color: #555;
+    text-align: left;
+}
+
+footer {
+    position: absolute;
+    bottom: 20px;
+    color: #f8f9fa;
+    font-size: 0.9em;
+    text-align: center;
+    width: 100%;
+}

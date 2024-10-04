@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Caveat:wght@400;700&family=Lobster&family=Monoton&family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display+SC:ital,wght@0,400;0,700;1,700&family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Source+Sans+Pro:ital,wght@0,400;0,700;1,700&family=Work+Sans:ital,wght@0,400;0,700;1,700&display=swap');
+
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero { 
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(https://wallpapercg.com/media/ts_orig/19892.webp);
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formbox {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.3); /* Slightly transparent background */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow to make the formbox stand out */
+    position: relative;
+}
+
+.buttonbox {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.button-1, .button-2 {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #fff;
+    transition: background 0.3s ease;
+    margin: 0 10px;
+}
+
+.button-1 {
+    background: linear-gradient(to right, #ff105f, #ffad06);
+}
+
+.button-1:hover {
+    background: linear-gradient(to right, #d4004b, #e09300);
+}
+
+.button-2 {
+    background-image: linear-gradient(to right, rgb(1, 134, 218), rgb(182, 49, 167));
+}
+
+.button-2:hover {
+    background-image: linear-gradient(to right, rgb(0, 120, 206), rgb(155, 36, 148));
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.6); /* Slightly transparent input fields */
+}
+
+.username, .password {
+    text-shadow: 1px 1px 2px #777;
+}
+
+.rem {
+    color: #000; /* Black color for "Remember Username" text */
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 1rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.check-box {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    accent-color: black; /* Makes checkbox color black */
+}
+
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    font-size: 18px;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:active {
+    color: #000;
+}
+
+.glow-on-hover:active:before {
+    background: transparent;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Responsive Styles */
+@media (max-width: 576px) { /* Extra Small Devices, Phones */
+    .button-1, .button-2 {
+        font-size: 16px;
+        padding: 8px 20px;
+    }
+
+    .input-field {
+        font-size: 14px;
+    }
+
+    .glow-on-hover {
+        width: 180px;
+        height: 40px;
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) { /* Small Devices, Tablets */
+    .button-1, .button-2 {
+        font-size: 17px;
+        padding: 9px 25px;
+    }
+
+    .input-field {
+        font-size: 15px;
+    }
+
+    .glow-on-hover {
+        width: 200px;
+        height: 45px;
+        font-size: 17px;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 992px) { /* Medium Devices, Desktops */
+    .button-1, .button-2 {
+        font-size: 18px;
+        padding: 10px 30px;
+    }
+
+    .input-field {
+        font-size: 16px;
+    }
+
+    .glow-on-hover {
+        width: 220px;
+        height: 50px;
+        font-size: 18px; 
+        text-decoration: none;
+    }
+}
+
+@media (min-width: 993px) and (max-width: 1200px) { /* Large Devices, Large Desktops */
+    .button-1, .button-2 {
+        font-size: 19px;
+        padding: 11px 32px;
+    }
+
+    .input-field {
+        font-size: 17px;
+    }
+
+    .glow-on-hover {
+        width: 240px;
+        height: 55px;
+        font-size: 19px;
+    }
+}
+
+@media (min-width: 1201px) { /* Extra Large Devices, Extra Large Desktops */
+    .button-1, .button-2 {
+        font-size: 20px;
+        padding: 12px 35px;
+    }
+
+    .input-field {
+        font-size: 18px;
+    }
+
+    .glow-on-hover {
+        width: 260px;
+        height: 60px;
+        font-size: 20px;
+    }
+} 
+

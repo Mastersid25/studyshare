@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Share</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="formbox">
+            <!-- Tabs -->
+            <div class="buttonbox">
+                <button type="button" class="button-1" onclick="showLogin()">Login</button>
+                <button type="button" class="button-2" onclick="showRegister()">Register</button>
+            </div>
+
+            <!-- Login Form -->
+            <div id="login-form" class="form-content">
+                <form id="login-form-element" class="input-group login-cred">
+                    <input type="email" id="login-email" class="input-field" placeholder="Email" required>
+                    <input type="password" id="login-password" class="input-field" placeholder="Enter Password" required>
+                    <div class="block">
+                        <label class="checkbox-label">
+                            <input type="checkbox" class="check-box">
+                            <span class="rem">Remember Me</span>
+                        </label>
+                    </div>
+                    <div class="btn-3-block">
+                        <button type="submit" class="glow-on-hover">Login</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Register Form -->
+            <div id="register-form" class="form-content" style="display: none;">
+                <form id="register-form-element" class="input-group register-cred">
+                    <input type="text" id="username" class="input-field" placeholder="Create a Username" required />
+                    <input type="email" id="email" class="input-field" placeholder="Email" required>
+                    <input type="password" id="create-password" class="input-field" placeholder="Create a Password" required />
+                    <input type="password" id="retype-password" class="input-field" placeholder="Re-type Password" required />
+                    <div class="btn-3-block">
+                        <input type="submit" class="glow-on-hover" value="Sign Up" id="signup" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle between login and register forms
+        function showLogin() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+        }
+
+        function showRegister() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        // Validate passwords during registration
+        function validatePasswords() {
+            const password = document.getElementById('create-password').value;
+            const retypePassword = document.getElementById('retype-password').value;
+
+            if (password !== retypePassword) {
+                alert('Passwords do not match');
+                return false; // Prevent form submission
+            }
+            return true; // Allow form submission
+        }
+
+    </script>
+
+    <script type="module">
+        // Import Firebase functions
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-analytics.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBwXxfmIKwH43zNE5NCCHvzJ5YNobm1lLQ",
+            authDomain: "mainminiproject-33e57.firebaseapp.com",
+            projectId: "mainminiproject-33e57",
+            storageBucket: "mainminiproject-33e57.appspot.com",
+            messagingSenderId: "772675430843",
+            appId: "1:772675430843:web:9f7dcc6e26b523fd047c9e",
+            measurementId: "G-Y4JNPW985V"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+        const auth = getAuth();
+
+        // Register User Function
+        async function registerUser(event) {
+            event.preventDefault(); // Prevent form submission
+            if (!validatePasswords()) return;
+
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('create-password').value;
+            var username = document.getElementById('username').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+
+                    // Write user data to Firebase Database
+                    set(ref(database, 'users/' + user.uid), {
+                        username: username,
+                        email: email
+                    }).then(() => {
+                        alert('User Created Successfully');
+                        window.location.href = 'project1.html'; // Redirect to next page
+                    }).catch((error) => {
+                        alert('Error saving user data: ' + error.message);
+                    });
+                })
+                .catch((error) => {
+                    alert('Error: ' + error.message);
+                });
+        }
+
+        // Login User Function
+        async function loginUser(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var email = document.getElementById('login-email').value;
+            var password = document.getElementById('login-password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert('Login Successful');
+                    window.location.href = 'project1.html'; // Redirect to next page
+                })
+                .catch((error) => {
+                    alert('Error: ' + error.message);
+                });
+        }
+
+        // Add event listeners
+        document.getElementById('signup').addEventListener('click', registerUser);
+        document.getElementById('login-form-element').addEventListener('submit', loginUser);
+    </script>
+</body>
+</html>
