@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>Study Share - View Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://images.pexels.com/photos/46274/pexels-photo-46274.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+            background-size: cover;
+            color: #333;
+        }
+
+        .navbar {
+            background: linear-gradient(to left, rgb(250, 250, 105), rgb(243, 243, 47), rgb(252, 164, 0));
+            border: 2px solid rgb(8, 8, 8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style-type: none;
+            padding: 10px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar li {
+            margin: 0 20px;
+        }
+
+        .navbar li a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+
+        .navbar li a:hover {
+            color: rgb(50, 248, 232);
+        }
+
+        .container {
+            text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            max-width: 800px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .file-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .file-item {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            width: calc(50% - 40px);
+            /* Two files per row */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .file-item img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .filters {
+            margin-bottom: 20px;
+        }
+
+        .filters input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+
+        .filters button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filters button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="project1.html">Upload
+                    notes</a></li>
+            <li><a href="FileViewer.html">View
+                    notes</a></li>
+            <li><a href="#">About us</a></li>
+            <li>
+                <input type="text"
+                    id="searchInput"
+                    placeholder="Search by uploader name">
+            </li>
+            <li>
+                <button
+                    id="searchButton">Search</button>
+            </li>
+            <li><a href="login.html">Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Uploaded Files</h1>
+        <div id="fileList" class="file-list">
+            <!-- Files will be displayed here -->
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
+        import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js';
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuoQzySNrHFkAfK08Aw60F3G_azHEPARg",
+            authDomain: "sidsminiproject.firebaseapp.com",
+            databaseURL: "https://sidsminiproject-default-rtdb.firebaseio.com",
+            projectId: "sidsminiproject",
+            storageBucket: "sidsminiproject.appspot.com",
+            messagingSenderId: "409993281732",
+            appId: "1:409993281732:web:d7e27816df2932a7ae4991",
+            measurementId: "G-B2B517H0FG"
+        };
+
+        // Initialize Firebase
+        const firebaseapp = initializeApp(firebaseConfig);
+        const db = getFirestore(firebaseapp);
+
+        // Fetch files from Firestore
+        async function fetchFiles() {
+            const fileListDiv = document.getElementById('fileList');
+            const querySnapshot = await getDocs(collection(db, 'uploads'));
+
+            querySnapshot.forEach((doc) => {
+                const fileData = doc.data();
+                const fileItem = document.createElement('div');
+                fileItem.className = 'file-item';
+
+                // Add file preview for images
+                if (fileData.fileURL.endsWith('.png') || fileData.fileURL.endsWith('.jpg') || fileData.fileURL.endsWith('.jpeg')) {
+                    const img = document.createElement('img');
+                    img.src = fileData.fileURL;
+                    fileItem.appendChild(img);
+                }
+
+                // Add uploader's name and upload date
+                const uploaderName = document.createElement('p');
+                uploaderName.textContent = `Uploaded by: ${fileData.uploadedBy || 'Unknown'}`;
+                fileItem.appendChild(uploaderName);
+
+                const uploadDate = document.createElement('p');
+                uploadDate.textContent = `Uploaded on: ${fileData.uploadedAt ? new Date(fileData.uploadedAt.seconds * 1000).toLocaleDateString() : 'Unknown date'}`;
+                fileItem.appendChild(uploadDate);
+
+                // Add file download link
+                const link = document.createElement('a');
+                link.href = fileData.fileURL;
+                link.textContent = fileData.fileName;
+                link.target = '_blank';
+                fileItem.appendChild(link);
+
+                fileListDiv.appendChild(fileItem);
+            });
+        }
+
+        // Search functionality
+        document.getElementById('searchButton').addEventListener('click', async () => {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const fileListDiv = document.getElementById('fileList');
+            fileListDiv.innerHTML = ''; // Clear previous results
+
+            const querySnapshot = await getDocs(collection(db, 'uploads'));
+            querySnapshot.forEach((doc) => {
+                const fileData = doc.data();
+                if (fileData.uploadedBy && fileData.uploadedBy.toLowerCase().includes(searchInput)) {
+                    const fileItem = document.createElement('div');
+                    fileItem.className = 'file-item';
+
+                    // Add file preview for images
+                    if (fileData.fileURL.endsWith('.png') || fileData.fileURL.endsWith('.jpg') || fileData.fileURL.endsWith('.jpeg')) {
+                        const img = document.createElement('img');
+                        img.src = fileData.fileURL;
+                        fileItem.appendChild(img);
+                    }
+
+                    // Add uploader's name and upload date
+                    const uploaderName = document.createElement('p');
+                    uploaderName.textContent = `Uploaded by: ${fileData.uploadedBy || 'Unknown'}`;
+                    fileItem.appendChild(uploaderName);
+
+                    const uploadDate = document.createElement('p');
+                    uploadDate.textContent = `Uploaded on: ${fileData.uploadedAt ? new Date(fileData.uploadedAt.seconds * 1000).toLocaleDateString() : 'Unknown date'}`;
+                    fileItem.appendChild(uploadDate);
+
+                    // Add file download link
+                    const link = document.createElement('a');
+                    link.href = fileData.fileURL;
+                    link.textContent = fileData.fileName;
+                    link.target = '_blank';
+                    fileItem.appendChild(link);
+
+                    fileListDiv.appendChild(fileItem);
+                }
+            });
+        });
+
+        // Call fetchFiles when the page loads
+        window.onload = fetchFiles;
+    </script>
+</body>
+
+</html>

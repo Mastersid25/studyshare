@@ -1,86 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
     <title>Study Share - Upload Notes</title>
     <style>
         .navbar {
-            background: linear-gradient(to left,rgb(250, 250, 105),rgb(243, 243, 47),rgb(252, 164, 0));
+            background: linear-gradient(to left, rgb(250, 250, 105), rgb(243, 243, 47), rgb(252, 164, 0));
             border: 2px solid;
-            border-color: rgb(8, 8, 8); 
+            border-color: rgb(8, 8, 8);
             position: sticky;
         }
+
         .navbar ul {
             overflow: auto;
         }
+
         .navbar li {
             float: left;
             list-style: none;
             margin: 13px 20px;
         }
+
         .navbar li a {
             padding: 3px 3px;
             color: rgb(0, 0, 0);
             text-decoration: none;
         }
+
         .navbar li a:hover {
             color: rgb(50, 248, 232);
         }
+
         body {
             background-image: url(https://images.pexels.com/photos/762686/pexels-photo-762686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
             background-size: cover;
         }
+
         .search {
             float: right;
             padding: 12px 75px;
-            color: whitesmoke; 
-        } 
+            color: whitesmoke;
+        }
+
         .navbar input {
             border: 2px solid;
             border-color: blue;
             border-radius: 3px;
         }
+
         .acc {
-            float:right;
+            float: right;
             padding: 12px 75px;
-        } 
+        }
+
         .acc a {
             text-decoration: none;
-            background: linear-gradient(to left,rgb(250, 250, 105),rgb(243, 243, 47),rgb(252, 164, 0));
+            background: linear-gradient(to left, rgb(250, 250, 105), rgb(243, 243, 47), rgb(252, 164, 0));
         }
+
         .acc a:hover {
             color: blueviolet;
-        } 
-        #title {
-            color:rgb(3, 3, 3)
         }
+
+        #title {
+            color: rgb(3, 3, 3)
+        }
+
         .lb {
             color: rgb(0, 0, 0);
         }
-        .input-group { 
+
+        .input-group {
             width: 380px;
             height: 480px;
-            position:relative;
+            position: relative;
             margin: 2% auto;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.3);
             padding: 5px;
-        } 
+        }
+
         .btn1 {
             border: 1px solid rgb(0, 0, 0);
-        } 
+        }
+
         .btn2 {
             border: 2px solid black;
-            position:relative;
+            position: relative;
         }
+
         .Mydiv {
             text-align: center;
-        } 
+        }
+
         .input-group {
-            align-items: center; 
+            align-items: center;
             padding: 10px 30px;
         }
+
         /* Popup styles */
         .popup {
             display: none;
@@ -94,9 +114,11 @@
             border-radius: 10px;
             z-index: 1000;
         }
+
         .popup h2 {
             color: #4CAF50;
         }
+
         .popup button {
             background-color: #4CAF50;
             color: white;
@@ -104,9 +126,11 @@
             padding: 10px;
             cursor: pointer;
         }
+
         .popup button:hover {
             background-color: #45a049;
         }
+
         .overlay {
             display: none;
             position: fixed;
@@ -119,71 +143,86 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <nav class="navbar">
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Upload notes</a></li>
-                <li><a href="#">View notes</a></li>
+                <li><a href="project1.html">Upload
+                        notes</a>
+                </li>
+                <li><a href="FileViewer.html">View
+                        notes</a>
+                </li>
                 <li><a href="#">About us</a></li>
                 <div class="search">
-                    <input type="text" name="search" id="search" placeholder="Search this website">
+                    <input type="text"
+                        name="search" id="search"
+                        placeholder="Search this website">
                 </div>
                 <div class="acc">
-                    <a href="login.html">Login/Register</a>
+                    <a
+                        href="login.html">Logout</a>
                 </div>
             </ul>
         </nav>
-    </header> 
-    <h1 align="center" id="title"><b>Upload Notes</b></h1>
+    </header>
+    <h1 align="center" id="title"><b>Upload
+            Notes</b></h1>
     <hr>
     <div>
         <form class="input-group">
             <div>
-                <label for="Mybranch" class="lb"><b>Select Branch:</b></label>
+                <label for="Mybranch"
+                    class="lb"><b>Select
+                        Branch:</b></label>
                 <br>
-                <select name="Mybranch" id="Branch" class="select1">
-                    <option value="FE">First year Engineering</option>
-                    <option value="comp">Computer</option>
-                    <option value="aiml">CS(AIML)</option>
-                    <option value="ds">CS(DS)</option>
-                    <option value="extc">EXTC</option>
-                    <option value="civil">Civil</option>
-                    <option value="mech">Mechanical</option>
-                </select>            
-            </div>
-            <div>
-                <label for="sem" class="lb"><b>Semester</b></label><br>
-                <select name="sem" id="sem">
-                    <option value="s1">1</option>
-                    <option value="s2">2</option>
-                    <option value="s3">3</option>
-                    <option value="s4">4</option>
-                    <option value="s5">5</option>
-                    <option value="s6">6</option>
-                    <option value="s7">7</option>
-                    <option value="s8">8</option>
+                <select name="Mybranch"
+                    id="Branch" class="select1">
+                    <option value="FE">First year
+                        Engineering</option>
+                    <option value="comp">Computer
+                    </option>
+                    <option value="aiml">CS(AIML)
+                    </option>
+                    <option value="ds">CS(DS)
+                    </option>
+                    <option value="extc">EXTC
+                    </option>
+                    <option value="civil">Civil
+                    </option>
+                    <option value="mech">
+                        Mechanical</option>
                 </select>
             </div>
+
             <div class="lb">
-                <b>Subject:</b><br><input type="text" name="subject" id="subject">
-            </div> 
-            <div> 
+                <b>Subject:</b><br><input
+                    type="text" name="subject"
+                    id="subject">
+            </div>
+            <div>
                 <b>Select File:</b>
-                <input type="file" id="fileUpload" class="btn1">
+                <input type="file" id="fileUpload"
+                    class="btn1">
             </div><br>
-            <label for="filetype" class="lb"><b>File Type</b></label>
+            <label for="filetype"
+                class="lb"><b>File
+                    Type</b></label>
             <select name="filetype" id="ft">
                 <option value="pdf">PDF</option>
-                <option value="wd">Word Document</option>
+                <option value="wd">Word Document
+                </option>
                 <option value="jpg">JPG</option>
                 <option value="png">PNG</option>
             </select>
             <br><br>
             <div class="Mydiv">
-                <button type="button" id="btn" class="btn2">Upload</button> 
-                <button type="reset" class="btn2">Reset</button>
+                <button type="button" id="btn"
+                    class="btn2">Upload</button>
+                <button type="reset"
+                    class="btn2">Reset</button>
             </div>
             <div id="status"></div>
             <div id="filePreview"></div>
@@ -194,92 +233,118 @@
     <div class="overlay" id="overlay"></div>
     <div class="popup" id="popup">
         <h2>Upload Successful!</h2>
-        <p>Your document has been uploaded successfully.</p>
+        <p>Your document has been uploaded
+            successfully.</p>
         <button id="closePopup">Close</button>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js"></script>
 
-    <script>
-        // Firebase configuration
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Firebase configuration - replace this with your own Firebase project credentials
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js';
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js';
+
         const firebaseConfig = {
-            apiKey: "AIzaSyBwXxfmIKwH43zNE5NCCHvzJ5YNobm1lLQ",
-            authDomain: "mainminiproject-33e57.firebaseapp.com",
-            projectId: "mainminiproject-33e57",
-            storageBucket: "mainminiproject-33e57.appspot.com",
-            messagingSenderId: "772675430843",
-            appId: "1:772675430843:web:9f7dcc6e26b523fd047c9e",
-            measurementId: "G-Y4JNPW985V"
+            apiKey: "AIzaSyDuoQzySNrHFkAfK08Aw60F3G_azHEPARg",
+            authDomain: "sidsminiproject.firebaseapp.com",
+            databaseURL: "https://sidsminiproject-default-rtdb.firebaseio.com",
+            projectId: "sidsminiproject",
+            storageBucket: "sidsminiproject.appspot.com",
+            messagingSenderId: "409993281732",
+            appId: "1:409993281732:web:d7e27816df2932a7ae4991",
+            measurementId: "G-B2B517H0FG"
         };
 
         // Initialize Firebase
-        const app = firebase.initializeApp(firebaseConfig);
-        const storage = firebase.storage();
-        const db = firebase.firestore();
+        const firebaseapp = initializeApp(firebaseConfig);
+        const db = getFirestore(firebaseapp);
+        const storage = getStorage(firebaseapp);
 
+        // Get references to DOM elements
         const fileInput = document.getElementById('fileUpload');
-        const uploadBtn = document.getElementById('btn');
+        const uploadButton = document.getElementById('btn');
         const statusDiv = document.getElementById('status');
-        const filePreview = document.getElementById('filePreview');
-        const popup = document.getElementById('popup');
+        const filePreviewDiv = document.getElementById('filePreview');
+
+        // Popup elements
         const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('popup');
         const closePopupBtn = document.getElementById('closePopup');
 
-        uploadBtn.addEventListener('click', async function () {
+        // Add event listener to the upload button
+        uploadButton.addEventListener('click', () => {
+            // Get the selected file
             const file = fileInput.files[0];
-            const branch = document.getElementById('Branch').value;
-            const semester = document.getElementById('sem').value;
-            const subject = document.getElementById('subject').value;
-            const fileType = document.getElementById('ft').value;
 
-            if (file) {
-                statusDiv.innerHTML = 'Uploading...';
-
-                const storageRef = storage.ref('uploads/' + file.name);
-                const uploadTask = storageRef.put(file);
-
-                uploadTask.on('state_changed', 
-                    (snapshot) => {
-                        let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                        statusDiv.innerHTML = 'Upload is ' + progress + '% done';
-                    }, 
-                    (error) => {
-                        statusDiv.innerHTML = 'Error uploading file: ' + error.message;
-                    }, 
-                    async () => {
-                        const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
-
-                        // Save file info to Firestore
-                        await db.collection('files').add({
-                            url: downloadURL,
-                            name: file.name,
-                            type: fileType,
-                            branch: branch,
-                            semester: semester,
-                            subject: subject,
-                            timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                        });
-
-                        statusDiv.innerHTML = 'File uploaded successfully!';
-                        filePreview.innerHTML = `<p>File Name: ${file.name}</p><p>File Type: ${fileType}</p><a href="${downloadURL}" target="_blank">View File</a>`;
-
-                        // Show popup
-                        overlay.style.display = 'block';
-                        popup.style.display = 'block';
-                    }
-                );
-            } else {
-                statusDiv.innerHTML = 'Please select a file to upload!';
+            // Check if a file was selected
+            if (!file) {
+                statusDiv.textContent = 'Please select a file.';
+                return;
             }
+
+            // Create a reference to the file in Firebase Storage
+            const storageRef = ref(storage, 'uploads/' + file.name);
+
+            // Upload the file to Firebase Storage
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            // Listen for state changes 
+            uploadTask.on('state_changed', (snapshot) => {
+                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                statusDiv.textContent = `Uploading: ${progress.toFixed(2)}%`;
+            }, (error) => {
+                // Handle errors
+                statusDiv.textContent = 'Error uploading file: ' + error.message;
+            }, () => {
+                // Handle successful upload
+                getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    statusDiv.textContent = 'File uploaded successfully. Download URL: ' + downloadURL;
+
+                    // Store the file information in Firestore
+                    addDoc(collection(db, 'uploads'), {
+                        fileName: file.name,
+                        fileURL: downloadURL,
+                        uploadedAt: new Date()
+                    }).then(() => {
+                        console.log('File information saved to Firestore');
+                    }).catch((error) => {
+                        console.error('Error saving file information: ', error);
+                    });
+
+                    // Create a new anchor element to download the file
+                    const downloadLink = document.createElement('a');
+                    downloadLink.href = downloadURL;
+                    downloadLink.download = file.name;
+                    downloadLink.textContent = 'Download File';
+
+                    // Create a new image element to preview the file (if it's an image)
+                    if (file.type.startsWith('image/')) {
+                        const image = document.createElement('img');
+                        image.src = downloadURL;
+                        image.width = 300;
+                        image.height = 300;
+                        filePreviewDiv.appendChild(image);
+                    } else {
+                        // For non-image files, display a link to download
+                        filePreviewDiv.appendChild(downloadLink);
+                    }
+
+                    // Show popup
+                    overlay.style.display = 'block';
+                    popup.style.display = 'block';
+                });
+            });
         });
 
-        closePopupBtn.addEventListener('click', function () {
+        // Close the popup when the button is clicked
+        closePopupBtn.addEventListener('click', () => {
             overlay.style.display = 'none';
             popup.style.display = 'none';
         });
+
     </script>
 </body>
+
 </html>

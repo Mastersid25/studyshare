@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+    <title>Study Share - Upload Notes</title>
+    <style>
+        .navbar {
+            background: linear-gradient(to left, rgb(250, 250, 105), rgb(243, 243, 47), rgb(252, 164, 0));
+            border: 2px solid;
+            border-color: rgb(8, 8, 8);
+            position: sticky;
+        }
+
+        .navbar ul {
+            overflow: auto;
+        }
+
+        .navbar li {
+            float: left;
+            list-style: none;
+            margin: 13px 20px;
+        }
+
+        .navbar li a {
+            padding: 3px 3px;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+
+        .navbar li a:hover {
+            color: rgb(50, 248, 232);
+        }
+
+        body {
+            background-image: url(https://images.pexels.com/photos/762686/pexels-photo-762686.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+            background-size: cover;
+        }
+
+        .search {
+            float: right;
+            padding: 12px 75px;
+            color: whitesmoke;
+        }
+
+        .navbar input {
+            border: 2px solid;
+            border-color: blue;
+            border-radius: 3px;
+        }
+
+        .acc {
+            float: right;
+            padding: 12px 75px;
+        }
+
+        .acc a {
+            text-decoration: none;
+            background: linear-gradient(to left, rgb(250, 250, 105), rgb(243, 243, 47), rgb(252, 164, 0));
+        }
+
+        .acc a:hover {
+            color: blueviolet;
+        }
+
+        #title {
+            color: rgb(3, 3, 3)
+        }
+
+        .lb {
+            color: rgb(0, 0, 0);
+        }
+
+        .input-group {
+            width: 380px;
+            height: 480px;
+            position: relative;
+            margin: 2% auto;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.3);
+            padding: 5px;
+        }
+
+        .btn1 {
+            border: 1px solid rgb(0, 0, 0);
+        }
+
+        .btn2 {
+            border: 2px solid black;
+            position: relative;
+        }
+
+        .Mydiv {
+            text-align: center;
+        }
+
+        .input-group {
+            align-items: center;
+            padding: 10px 30px;
+        }
+
+        /* Popup styles */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            z-index: 1000;
+        }
+
+        .popup h2 {
+            color: #4CAF50;
+        }
+
+        .popup button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .popup button:hover {
+            background-color: #45a049;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="project1.html">Upload
+                        notes</a></li>
+                <li><a href="FileViewer.html">View
+                        notes</a></li>
+                <li><a href="#">About us</a></li>
+                <div class="search">
+                    <input type="text"
+                        name="search" id="search"
+                        placeholder="Search this website">
+                </div>
+                <div class="acc">
+                    <a
+                        href="login.html">Logout</a>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <h1 align="center" id="title"><b>Upload
+            Notes</b></h1>
+    <hr>
+    <div>
+        <form class="input-group">
+            <div>
+                <label for="Mybranch"
+                    class="lb"><b>Select
+                        Branch:</b></label>
+                <br>
+                <select name="Mybranch"
+                    id="Branch" class="select1">
+                    <option value="FE">First year
+                        Engineering</option>
+                    <option value="comp">Computer
+                    </option>
+                    <option value="aiml">CS(AIML)
+                    </option>
+                    <option value="ds">CS(DS)
+                    </option>
+                    <option value="extc">EXTC
+                    </option>
+                    <option value="civil">Civil
+                    </option>
+                    <option value="mech">
+                        Mechanical</option>
+                </select>
+            </div>
+
+            <div class="lb">
+                <b>Subject:</b><br><input
+                    type="text" name="subject"
+                    id="subject">
+            </div>
+            <div>
+                <b>Select File:</b>
+                <input type="file" id="fileUpload"
+                    class="btn1">
+            </div><br>
+            <label for="filetype"
+                class="lb"><b>File
+                    Type</b></label>
+            <select name="filetype" id="ft">
+                <option value="pdf">PDF</option>
+                <option value="wd">Word Document
+                </option>
+                <option value="jpg">JPG</option>
+                <option value="png">PNG</option>
+            </select>
+            <br><br>
+            <div class="Mydiv">
+                <button type="button" id="btn"
+                    class="btn2">Upload</button>
+                <button type="reset"
+                    class="btn2">Reset</button>
+            </div>
+            <div id="status"></div>
+            <div id="filePreview"></div>
+        </form>
+    </div>
+
+    <!-- Popup for upload success -->
+    <div class="overlay" id="overlay"></div>
+    <div class="popup" id="popup">
+        <h2>Upload Successful!</h2>
+        <p>Your document has been uploaded
+            successfully.</p>
+        <button id="closePopup">Close</button>
+    </div>
+
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        // Firebase SDK
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
+        import { getFirestore, collection, addDoc } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js';
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js';
+
+        // Firebase configuration - replace this with your own Firebase project credentials
+        const firebaseConfig = {
+            apiKey: "AIzaSyDuoQzySNrHFkAfK08Aw60F3G_azHEPARg",
+            authDomain: "sidsminiproject.firebaseapp.com",
+            databaseURL: "https://sidsminiproject-default-rtdb.firebaseio.com",
+            projectId: "sidsminiproject",
+            storageBucket: "sidsminiproject.appspot.com",
+            messagingSenderId: "409993281732",
+            appId: "1:409993281732:web:d7e27816df2932a7ae4991",
+            measurementId: "G-B2B517H0FG"
+        };
+
+        // Initialize Firebase
+        const firebaseapp = initializeApp(firebaseConfig);
+        const db = getFirestore(firebaseapp);
+        const storage = getStorage(firebaseapp);
+
+        // Get references to DOM elements
+        const fileInput = document.getElementById('fileUpload');
+        const uploadButton = document.getElementById('btn');
+        const statusDiv = document.getElementById('status');
+        const filePreviewDiv = document.getElementById('filePreview');
+
+        // Popup elements
+        const overlay = document.getElementById('overlay');
+        const popup = document.getElementById('popup');
+        const closePopupBtn = document.getElementById('closePopup');
+
+        // Add event listener to the upload button
+        uploadButton.addEventListener('click', () => {
+            // Get the selected file
+            const file = fileInput.files[0];
+
+            // Check if a file was selected
+            if (!file) {
+                statusDiv.textContent = 'Please select a file.';
+                return;
+            }
+
+            // Create a reference to the file in Firebase Storage
+            const storageRef = ref(storage, 'uploads/' + file.name);
+
+            // Upload the file to Firebase Storage
+            const uploadTask = uploadBytesResumable(storageRef, file);
+
+            // Listen for state changes, errors, and completion of the upload
+            uploadTask.on('state_changed',
+                (snapshot) => {
+                    // Upload progress
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    statusDiv.textContent = 'Upload is ' + progress.toFixed(2) + '% done';
+                },
+                (error) => {
+                    // Handle upload errors
+                    statusDiv.textContent = 'Upload failed: ' + error.message;
+                },
+                () => {
+                    // Upload completed successfully
+                    getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        // Display the file download link or preview
+                        const fileLink = document.createElement('a');
+                        fileLink.href = downloadURL;
+                        fileLink.textContent = 'Download ' + file.name;
+                        filePreviewDiv.appendChild(fileLink);
+
+                        // Show success popup
+                        showPopup();
+
+                        // Save file metadata to Firestore
+                        const branch = document.getElementById('Branch').value;
+                        const subject = document.getElementById('subject').value;
+                        const fileType = document.getElementById('ft').value;
+
+                        addDoc(collection(db, 'uploads'), {
+                            fileName: file.name,
+                            branch: branch,
+                            subject: subject,
+                            fileType: fileType,
+                            fileURL: downloadURL,
+                            timestamp: new Date(),
+                        });
+                    });
+                }
+            );
+        });
+
+        // Function to show the popup
+        function showPopup() {
+            overlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        // Close popup event
+        closePopupBtn.addEventListener('click', () => {
+            overlay.style.display = 'none';
+            popup.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
